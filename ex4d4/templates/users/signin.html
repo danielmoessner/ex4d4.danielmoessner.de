@@ -1,0 +1,72 @@
+{% load static %}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+	{% include 'partials/head.html' %}
+</head>
+<body>
+
+
+	<section>
+		<div class="d-flex flex-column justify-content-center min-vh-100">
+			<div class="row d-flex justify-content-center align-items-center">
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="mb-10">
+
+						{% if form.errors %}
+							<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								Your username and password didn't match. Please try again.
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						{% endif %}
+
+						{% if next %}
+							{% if user.is_authenticated %}
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									Your account doesn't have access to this page. To proceed, please login with an account that has access.
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							{% else %}
+								<div class="alert alert-success alert-dismissible fade show" role="alert">
+									Please login to see this page.
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							{% endif %}
+						{% endif %}
+
+						<form method="post" action="{% url 'users:signin' %}">
+							{% csrf_token %}
+							<div class="form-group">
+								<label for="exampleInputEmail1">{{ form.username.label }}</label>
+								<input name="username" type="text" class="form-control" aria-describedby="emailHelp" value="{{ form.username.value|default_if_none:'' }}" placeholder="Username">
+								<small class="form-text text-muted">For example: m.mustermann.</small>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">{{ form.password.label }}</label>
+								<input name="password" type="password" class="form-control" value="" placeholder="Password">
+							</div>
+							<button type="submit" class="btn btn-primary">Login</button>
+							<input type="hidden" name="next" value="{{ next }}">
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- JAVASCRIPT -->
+	<!-- ================================================== -->
+	{% include 'partials/scripts.html' %}
+
+</body>
+</html>

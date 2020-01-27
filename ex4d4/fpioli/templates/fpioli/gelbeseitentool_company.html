@@ -1,0 +1,28 @@
+{% extends 'content/index.html' %}
+
+
+{% block top %}
+<h1 class="m-0">Gelbe Seiten Tool</h1>
+<div class="dropdown ml-auto">
+	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Actions
+	</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		<a class="dropdown-item" href="{% url 'fpioli:gelbeseitentool_companies' %}">Back</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item" href="{% url 'content:main' %}">Start</a>
+	</div>
+</div>
+{% endblock top %}
+{% block main %}
+<h2>{{ company.name }}</h2>
+<p>E-Mail: {{ company.email }}</p>
+<p>Address: {{ company.address }}</p>
+<p>Phone: {{ company.phone }}</p>
+<p>Website: {{ company.website }}</p>
+<p>Category: {{ company.category }}</p>
+<p>Location: {{ company.location }}</p>
+{% endblock main %}
+{% block sub %}
+<a class='btn btn-secondary' href="{% url 'fpioli:gelbeseitentool_companies' %}">Back</a>
+{% endblock sub %}
