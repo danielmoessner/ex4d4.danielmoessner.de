@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block body %}
+<a href="{% url 'gelbeseiten:index' %}">back</a>
+<hr>
+<h2>Fetch</h2>
+<form method="post" action="{% url 'gelbeseiten:fetch' %}">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Submit</button>
+</form>
+<hr>
+<h2>Fetches</h2>
+<h3>Scheduled</h3>
+{% for task in tasks %}
+{{ task.run_at|date:"d.m.Y H:i" }} - {{ task.task_params|slice:'2:-6' }}{%if not forloop.last %}<br>{% endif %}
+{% endfor %}
+<h3>Running</h3>
+{% for task in runningtasks %}
+{{ task.run_at|date:"d.m.Y H:i" }} - {{ task.task_params|slice:'2:-6' }}{%if not forloop.last %}<br>{% endif %}
+{% endfor %}
+<h3>Failed</h3>
+{% for task in failedtasks %}
+{{ task.run_at|date:"d.m.Y H:i" }} - {{ task.task_params|slice:'2:-6' }}{%if not forloop.last %}<br>{% endif %}
+{% endfor %}
+<hr>
+<h2>Completed Fetches</h2>
+{% for run in runs %}
+	<a href="{% url 'gelbeseiten:fetch_detail' run.pk %}">{{ run.name }}</a>{%if not forloop.last %}<br>{% endif %}
+{% endfor %}
+<hr>
+<a href="{% url 'gelbeseiten:index' %}">back</a>
+{% endblock body %}

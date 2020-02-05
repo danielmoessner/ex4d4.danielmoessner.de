@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block body %}
+<a href="{% url 'content:main' %}">back</a>
+<hr>
+<h2>Actions</h2>
+<ul>
+    <li>
+        <a href="{% url 'gelbeseiten:fetch' %}">fetch</a>
+    </li>
+    <li>
+        <a href="{% url 'gelbeseiten:data' %}">data</a>
+    </li>
+    <li>
+        <a href="{% url 'gelbeseiten:download' %}">download</a>
+    </li>
+</ul>
+<hr>
+<a href="{% url 'content:main' %}">back</a>
+{% endblock body %}

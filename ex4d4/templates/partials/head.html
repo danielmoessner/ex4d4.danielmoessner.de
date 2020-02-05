@@ -1,0 +1,30 @@
+
+{% load static %}
+
+<!-- icon -->
+<link rel="icon" href="{% static 'img/logo256.png' %}" type="image/png" sizes="256x256">
+
+<!-- required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- libs css -->
+<link rel="stylesheet" href="{% static 'fonts/Feather/feather.css' %}">
+<link rel="stylesheet" href="{% static 'libs/flickity/dist/flickity.min.css' %}">
+<link rel="stylesheet" href="{% static 'libs/flickity-fade/flickity-fade.css' %}">
+<link rel="stylesheet" href="{% static 'libs/aos/dist/aos.css' %}">
+<link rel="stylesheet" href="{% static 'libs/jarallax/dist/jarallax.css' %}">
+<link rel="stylesheet" href="{% static 'libs/highlightjs/styles/vs2015.css' %}">
+<link rel="stylesheet" href="{% static 'libs/@fancyapps/fancybox/dist/jquery.fancybox.min.css' %}">
+
+<!-- theme css -->
+<link rel="stylesheet" href="{% static 'css/theme.css' %}">
+
+<!-- page title -->
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<meta content="{{ title }}" property="og:title">
+<meta content="{{ description }}" property="og:description">
+
+<!-- header code -->
+{{ header_code|safe }}

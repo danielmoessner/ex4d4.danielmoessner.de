@@ -1,0 +1,75 @@
+{% extends 'content/index.html' %}
+
+
+{% block top %}
+<h1 class="m-0">BTV Tool</h1>
+<div class="dropdown ml-auto">
+	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Actions
+	</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		<a class="dropdown-item" href="{% url 'fpioli:btvtool' %}">Back</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item" href="{% url 'content:main' %}">Start</a>
+	</div>
+</div>
+{% endblock top %}
+{% block main %}
+<h2>Download data</h2>
+
+{% if form.non_field_errors %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	{% for error in form.non_field_errors %}
+	{{ error }}
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	{% endfor %}
+</div>
+{% endif %}
+<form method="POST">
+
+	{% csrf_token %}
+
+	{% for field in form %}
+	<div class="form-group">
+		
+		<label>{{ field.label }}</label>
+		{% if field.errors %}
+		<input name="{{ field.html_name }}" type="{{ field.field.widget.input_type }}" class="form-control is-invalid" value="{{ field.value|default_if_none:'' }}">
+		{% if field.help_text %}
+		<small class="form-text text-muted">
+			{{ field.help_text|safe }}
+		</small>
+		{% endif %}
+		<div class="invalid-feedback">
+			{{ field.errors }}
+		</div>
+		{% else %}
+		<input name="{{ field.html_name }}" type="{{ field.field.widget.input_type }}" class="form-control" value="{{ field.value|default_if_none:'' }}">
+		{% if field.help_text %}
+		<small class="form-text text-muted">
+			{{ field.help_text|safe }}
+		</small>
+		{% endif %}
+		{% endif %}
+		
+	</div>
+	{% endfor %}
+
+	<input class="btn btn-primary" type="submit" value="Start">
+</form>
+
+<hr>
+<h2>Files</h2>
+{% if files %}
+{% for file in files %}
+<a href="{{ file.file.url }}">{{ file.name }}</a>{% if not forloop.last %}<br>{% endif %}
+{% endfor %}
+{% else %}
+<p>Files will show up here.</p>
+{% endif %}
+{% endblock main %}
+{% block sub %}
+<a class="btn btn-secondary" href="{% url 'fpioli:btvtool' %}">Back</a>
+{% endblock sub %}
