@@ -246,9 +246,10 @@ class Entry(models.Model):
             'name', 'email', 'phone', 'website', 'address', 'zipcode', 'city', 'category', 'location'))
         )
         file_name_short = 'gelbeseiten/{}-{}-{}.csv'.format(
-            timezone.localtime().strftime('%Y%m%d%H%M'),
             category,
-            location)
+            location,
+            timezone.localtime().strftime('%Y%m%d%H%M')
+        )
         file_name = os.path.join(settings.MEDIA_ROOT, file_name_short)
         df.to_csv(file_name, index=False)
         name = "{}-{}-{}.csv".format(
