@@ -1,0 +1,14 @@
+/ex4d4/files/node_modules
+/ex4d4/files/dist
+/ex4d4/static
+/ex4d4/media
+/.idea
+/.git
+**/__pycache__
+**/migrations
+
+/logs/**
+/db.sqlite3
+*.sqlite3
+*.gitignore
+*.pyc
