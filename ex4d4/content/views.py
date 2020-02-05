@@ -28,6 +28,4 @@ class MainView(LoginRequiredMixin, WebsiteContextMixin, TemplateView):
             if not row['app'] in context['permits']:
                 context['permits'][row['app']] = []
             context['permits'][row['app']].append(row['username'])
-        print(type(context['permits']['btv']))
-        print(context['permits']['btv'])
         return context
