@@ -44,10 +44,7 @@ INSTALLED_APPS = [
     'ex4d4.users.apps.UsersConfig',
     'ex4d4.fpioli.apps.FPioliConfig',
     'ex4d4.postforms.apps.PostformsConfig',
-<<<<<<< HEAD
-=======
     'ex4d4.gelbeseiten.apps.GelbeseitenConfig',
->>>>>>> 3a235621e8a019edead4fe74e2c13b2cef1c748d
     'background_task',
     'corsheaders',
 ]

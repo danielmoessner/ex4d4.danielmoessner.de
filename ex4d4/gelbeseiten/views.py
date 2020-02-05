@@ -16,7 +16,7 @@ from background_task.models import Task
 
 class TestMixin(UserPassesTestMixin):
     def test_func(self):
-        if self.request.user.is_superuser or self.request.user.username == 'f.pioli':
+        if self.request.user.is_superuser or self.request.user.username in ['f.pioli', 't.tester']:
             return True
         return False
 

@@ -7,17 +7,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 
 from ex4d4.core.views import WebsiteContextMixin
-<<<<<<< HEAD
-from .models import GelbeSeitenCompany
 from .models import ScrapeFile
-from .models import BtvClub
 from .models import ScrapeRun
-from .forms import GelbeSeitenForm
-=======
-from .models import ScrapeFile
 from .models import BtvClub
-from .models import ScrapeRun
->>>>>>> 3a235621e8a019edead4fe74e2c13b2cef1c748d
 from .forms import StartEndForm
 
 from background_task.models import Task

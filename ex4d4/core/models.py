@@ -1,6 +1,22 @@
 from django.db import models
 
 
+class Permit(models.Model):
+    APP_CHOICES = (
+        ('gelbeseiten', 'Gelbe Seiten Tool'),
+        ('btv', 'BTV Tool')
+    )
+    app = models.CharField(max_length=50, choices=APP_CHOICES)
+    username = models.CharField(max_length=200)
+
+    def __str__(self):
+        return '{} - {}'.format(self.username, self.app)
+
+    class Meta:
+        verbose_name = 'Permit'
+        verbose_name_plural = 'Permits'
+
+
 class Seo(models.Model):
     url = models.CharField(max_length=200, unique=True, blank=True, verbose_name='Url',
                            help_text='Activates on this url. If empty usually active.')

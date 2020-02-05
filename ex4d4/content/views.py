@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 
+from ex4d4.core.models import Permit
 from ex4d4.core.views import WebsiteContextMixin
 
 
@@ -19,3 +20,14 @@ class IndexView(RedirectView):
 
 class MainView(LoginRequiredMixin, WebsiteContextMixin, TemplateView):
     template_name = 'content/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['permits'] = {}
+        for row in Permit.objects.values('username', 'app'):
+            if not row['app'] in context['permits']:
+                context['permits'][row['app']] = []
+            context['permits'][row['app']].append(row['username'])
+        print(type(context['permits']['btv']))
+        print(context['permits']['btv'])
+        return context

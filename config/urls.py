@@ -24,10 +24,7 @@ urlpatterns = [
     path('users/', include('ex4d4.users.urls')),
     path('fpioli/', include('ex4d4.fpioli.urls')),
     path('postforms/', include('ex4d4.postforms.urls')),
-<<<<<<< HEAD
-=======
     path('gelbeseiten/', include('ex4d4.gelbeseiten.urls')),
->>>>>>> 3a235621e8a019edead4fe74e2c13b2cef1c748d
     path('', include('ex4d4.content.urls')),
     path('', include('ex4d4.core.urls')),
     path('admin/', admin.site.urls),
