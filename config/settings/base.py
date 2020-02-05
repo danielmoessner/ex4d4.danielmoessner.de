@@ -9,6 +9,7 @@ from django.core.exceptions import ImproperlyConfigured
 
 # Paths
 
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 APPS_DIR = os.path.join(BASE_DIR, "ex4d4")
 
@@ -39,12 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ex4d4.core.apps.CoreConfig',
-    'ex4d4.content.apps.ContentConfig',
-    'ex4d4.users.apps.UsersConfig',
-    'ex4d4.fpioli.apps.FPioliConfig',
-    'ex4d4.postforms.apps.PostformsConfig',
-    'ex4d4.gelbeseiten.apps.GelbeseitenConfig',
+    'apps.core.apps.CoreConfig',
+    'apps.content.apps.ContentConfig',
+    'apps.users.apps.UsersConfig',
+    'apps.fpioli.apps.FPioliConfig',
+    'apps.postforms.apps.PostformsConfig',
+    'apps.gelbeseiten.apps.GelbeseitenConfig',
     'background_task',
     'corsheaders',
 ]
@@ -66,8 +67,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(APPS_DIR, 'templates'),
-            os.path.join(APPS_DIR, 'files/dist/img'),
+            os.path.join(BASE_DIR, 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -118,8 +118,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#substituting-a-custom-user-model
 
 LOGIN_URL = 'users:signin'
+
 LOGIN_REDIRECT_URL = 'content:index'
+
 LOGOUT_REDIRECT_URL = 'users:signin'
+
 AUTH_USER_MODEL = 'users.CustomUser'
 
 
@@ -143,14 +146,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(APPS_DIR, 'files/dist'),
+    os.path.join(BASE_DIR, 'static/dist'),
 ]
 
-STATIC_ROOT = os.path.join(APPS_DIR, 'static')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(APPS_DIR, 'media')
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 
 
 # E-Mail

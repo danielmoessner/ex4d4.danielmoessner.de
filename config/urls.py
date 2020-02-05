@@ -21,20 +21,20 @@ from django.urls import path
 
 
 urlpatterns = [
-    path('users/', include('ex4d4.users.urls')),
-    path('fpioli/', include('ex4d4.fpioli.urls')),
-    path('postforms/', include('ex4d4.postforms.urls')),
-    path('gelbeseiten/', include('ex4d4.gelbeseiten.urls')),
-    path('', include('ex4d4.content.urls')),
-    path('', include('ex4d4.core.urls')),
+    path('users/', include('apps.users.urls')),
+    path('fpioli/', include('apps.fpioli.urls')),
+    path('postforms/', include('apps.postforms.urls')),
+    path('gelbeseiten/', include('apps.gelbeseiten.urls')),
+    path('', include('apps.content.urls')),
+    path('', include('apps.core.urls')),
     path('admin/', admin.site.urls),
 ]
 
 
-handler400 = "ex4d4.core.views.error_400_view"
-handler403 = "ex4d4.core.views.error_403_view"
-handler404 = "ex4d4.core.views.error_404_view"
-handler500 = "ex4d4.core.views.error_500_view"
+handler400 = "apps.core.views.error_400_view"
+handler403 = "apps.core.views.error_403_view"
+handler404 = "apps.core.views.error_404_view"
+handler500 = "apps.core.views.error_500_view"
 
 
 if settings.DEBUG:
