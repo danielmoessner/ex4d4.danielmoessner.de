@@ -7,11 +7,17 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 
 from ex4d4.core.views import WebsiteContextMixin
+<<<<<<< HEAD
 from .models import GelbeSeitenCompany
 from .models import ScrapeFile
 from .models import BtvClub
 from .models import ScrapeRun
 from .forms import GelbeSeitenForm
+=======
+from .models import ScrapeFile
+from .models import BtvClub
+from .models import ScrapeRun
+>>>>>>> 3a235621e8a019edead4fe74e2c13b2cef1c748d
 from .forms import StartEndForm
 
 from background_task.models import Task
@@ -102,80 +108,3 @@ class BtvToolDownloadView(FPioliTestMixin, FormView, WebsiteContextMixin, Templa
         BtvClub.to_csv(start, end)
         BtvClub.to_xlsx(start, end)
         return HttpResponseRedirect(reverse_lazy('fpioli:btvtool_download'))
-
-
-class GelbeSeitenToolView(FPioliTestMixin, WebsiteContextMixin, TemplateView):
-    template_name = 'fpioli/gelbeseitentool.html'
-
-
-class GelbeSeitenToolFetchView(FPioliTestMixin, WebsiteContextMixin, FormView):
-    template_name = 'fpioli/gelbeseitentool_fetch.html'
-    form_class = GelbeSeitenForm
-    success_url = reverse_lazy('fpioli:gelbeseitentool_fetch')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tasks'] = Task.objects.filter(queue='gelbeseiten_queue').annotate(text_len=Length('last_error')).filter(text_len__lt=10)
-        context['runningtasks'] = context['tasks'].exclude(locked_by=None)
-        context['failedtasks'] = Task.objects.annotate(text_len=Length('last_error')).filter(text_len__gte=10)
-        return context
-
-    def form_valid(self, form):
-        category = form.cleaned_data['category']
-        location = form.cleaned_data['location']
-        GelbeSeitenCompany.scrape(category, location)
-        return super().form_valid(form)
-
-
-class GelbeSeitenToolDownloadView(FPioliTestMixin, WebsiteContextMixin, FormView):
-    template_name = 'fpioli/gelbeseitentool_download.html'
-    form_class = GelbeSeitenForm
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['files'] = ScrapeFile.objects.filter(tool='GS').order_by('-created_at')[:10]
-        return context
-
-    def form_valid(self, form):
-        category = form.cleaned_data['category']
-        location = form.cleaned_data['location']
-        GelbeSeitenCompany.to_csv(category, location)
-        GelbeSeitenCompany.to_xlsx(category, location)
-        return HttpResponseRedirect(reverse_lazy('fpioli:gelbeseitentool_download'))
-
-
-class GelbeSeitenToolMessagesView(FPioliTestMixin, WebsiteContextMixin, TemplateView):
-    template_name = 'fpioli/gelbeseitentool_messages.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['runs'] = ScrapeRun.objects.filter(tool='GS').order_by('-created_at')
-        return context
-
-
-class GelbeSeitenToolCompaniesView(FPioliTestMixin, WebsiteContextMixin, TemplateView):
-    template_name = 'fpioli/gelbeseitentool_companies.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['companies'] = GelbeSeitenCompany.objects.order_by('name')
-        return context
-
-
-class GelbeSeitenToolMessageView(FPioliTestMixin, WebsiteContextMixin, TemplateView):
-    template_name = 'fpioli/gelbeseitentool_message.html'
-    model = ScrapeRun
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['run'] = get_object_or_404(ScrapeRun, pk=kwargs['pk'])
-        return context
-
-
-class GelbeSeitenToolCompanyView(FPioliTestMixin, WebsiteContextMixin, TemplateView):
-    template_name = 'fpioli/gelbeseitentool_company.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['company'] = get_object_or_404(GelbeSeitenCompany, pk=kwargs['pk'])
-        return context

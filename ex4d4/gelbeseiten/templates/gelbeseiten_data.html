@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body %}
+<a href="{% url 'gelbeseiten:index' %}">back</a>
+<hr>
+<h2>Entries</h2>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    {% for company in companies %}
+    <tr>
+        <td>
+            {{ company.name }}
+        </td>
+        <td>
+            {{ company.category }}
+        </td>
+        <td>
+            {{ company.location }}
+        </td>
+        <td>
+            <a href="{% url 'gelbeseiten:data_detail' company.pk %}">Open</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<hr>
+<a href="{% url 'gelbeseiten:index' %}">back</a>
+{% endblock body %}

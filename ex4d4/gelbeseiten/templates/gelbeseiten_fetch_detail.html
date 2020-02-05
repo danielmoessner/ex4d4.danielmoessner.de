@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block body %}
+<a href="{% url 'gelbeseiten:fetch' %}">back</a>
+<hr>
+<h2>{{ run.name }}</h2>
+<p>{{ run.message|safe }}</p>
+<hr>
+<a href="{% url 'gelbeseiten:fetch' %}">back</a>
+{% endblock body %}
