@@ -3,6 +3,7 @@ from django.core.mail import EmailMessage
 from django.http import JsonResponse
 
 from .forms import KostenvoranschlagForm
+from .forms import KontaktForm
 
 import mimetypes
 import logging
@@ -35,4 +36,25 @@ class KuesGutachterDeKostenvoranschlag(FormView):
             email.attach(data.name, data.file.read(), mimetypes.guess_type(data.name)[0])
         email.send()
         logger.error('postforms:kuesgutachterde:kostenvoranschlag: email sent')
+        return JsonResponse({'is_form_valid': True})
+
+
+class TortugaWebdesignDeKontakt(FormView):
+    template_name = 'postforms/tortugawebdesignde_kontakt.html'
+    form_class = KontaktForm
+
+    def form_invalid(self, form):
+        logger.error('postforms:tortugawebdesignde:kontakt: {}'.format(form.errors))
+        return JsonResponse({'is_form_valid': False})
+
+    def form_valid(self, form):
+        subject = 'Neue Anfrage über die Webseite: tortuga-webdesign.de'
+        message = ''
+        for key, value in form.cleaned_data.items():
+            message += '{}: {}\n'.format(key, value)
+        recipient_list = ['kontakt@tortuga-webdesign.de']
+        email = EmailMessage(subject=subject, body=message, from_email='projekte@tortuga-webdesign.de',
+                             to=recipient_list)
+        # email.send()
+        logger.error('postforms:tortugawebdesignde:kontakt: email sent')
         return JsonResponse({'is_form_valid': True})

@@ -27,3 +27,9 @@ INTERNAL_IPS = ["127.0.0.1", ]
 GULP_CWD = "'{}'".format(os.path.join(BASE_DIR, 'static'))
 GULP_DEVELOP_COMMAND = 'gulp --cwd {}'.format(GULP_CWD)
 GULP_PRODUCTION_COMMAND = 'gulp build --cwd {}'.format(GULP_CWD)
+
+
+# Cors Headers
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'http:\/\/localhost:.*'
+]

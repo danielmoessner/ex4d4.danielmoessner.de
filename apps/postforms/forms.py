@@ -13,3 +13,10 @@ class KostenvoranschlagForm(forms.Form):
     bild4 = forms.ImageField(required=False)
     bild5 = forms.ImageField(required=False)
     bild6 = forms.ImageField(required=False)
+
+
+class KontaktForm(forms.Form):
+    name = forms.CharField()
+    website = forms.CharField()
+    email = forms.CharField()
+    message = forms.CharField()

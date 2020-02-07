@@ -9,4 +9,7 @@ urlpatterns = [
     path('kuesgutachterde/kostenvoranschlag',
          csrf_exempt(views.KuesGutachterDeKostenvoranschlag.as_view()),
          name='kuesgutachterde_kostenvoranschlag'),
+    path('tortugawebdesignde/kontakt',
+         csrf_exempt(views.TortugaWebdesignDeKontakt.as_view()),
+         name='tortugawebdesignde_kontakt'),
 ]
