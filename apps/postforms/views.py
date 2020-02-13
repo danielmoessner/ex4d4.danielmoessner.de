@@ -4,6 +4,7 @@ from django.http import JsonResponse
 
 from .forms import KostenvoranschlagForm
 from .forms import KontaktForm
+from .forms import PzmodeForm as FormsPzmodeForm
 
 import mimetypes
 import logging
@@ -55,6 +56,27 @@ class TortugaWebdesignDeKontakt(FormView):
         recipient_list = ['kontakt@tortuga-webdesign.de']
         email = EmailMessage(subject=subject, body=message, from_email='projekte@tortuga-webdesign.de',
                              to=recipient_list)
-        # email.send()
+        email.send()
         logger.error('postforms:tortugawebdesignde:kontakt: email sent')
+        return JsonResponse({'is_form_valid': True})
+
+
+class PzmodeForm(FormView):
+    template_name = 'postforms/pzmode_form.html'
+    form_class = FormsPzmodeForm
+
+    def form_invalid(self, form):
+        logger.error('postforms:pzmode:form: {}'.format(form.errors))
+        return JsonResponse({'is_form_valid': False})
+
+    def form_valid(self, form):
+        subject = 'Neue Anfrage über die Webseite: pz-mo.de'
+        message = ''
+        for key, value in form.cleaned_data.items():
+            message += '{}: {}\n'.format(key, value)
+        recipient_list = ['projekte@tortuga-webdesign.de']
+        email = EmailMessage(subject=subject, body=message, from_email='projekte@tortuga-webdesign.de',
+                             to=recipient_list)
+        email.send()
+        logger.error('postforms:pzmode:form: email sent')
         return JsonResponse({'is_form_valid': True})

@@ -169,5 +169,6 @@ EMAIL_PORT = 587
 CORS_ORIGIN_WHITELIST = [
     'https://kues-gutachter.webflow.io',
     'https://www.kues-gutachter.de',
-    'https://tortuga-webdesign.de'
+    'https://tortuga-webdesign.de',
+    'https://pz-mo.de'
 ]

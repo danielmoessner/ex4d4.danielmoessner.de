@@ -12,4 +12,7 @@ urlpatterns = [
     path('tortugawebdesignde/kontakt',
          csrf_exempt(views.TortugaWebdesignDeKontakt.as_view()),
          name='tortugawebdesignde_kontakt'),
+    path('pzmode/form',
+         csrf_exempt(views.PzmodeForm.as_view()),
+         name='pzmode_form'),
 ]
