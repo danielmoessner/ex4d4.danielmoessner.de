@@ -17,9 +17,9 @@ class KostenvoranschlagForm(forms.Form):
 
 class KontaktForm(forms.Form):
     name = forms.CharField()
-    website = forms.CharField()
     email = forms.CharField()
-    message = forms.CharField()
+    website = forms.CharField(required=False)
+    message = forms.CharField(required=False)
 
 
 class PzmodeForm(forms.Form):
