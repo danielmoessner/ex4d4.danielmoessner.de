@@ -56,6 +56,9 @@ class TortugaWebdesignDeKontakt(FormView):
         recipient_list = ['kontakt@tortuga-webdesign.de']
         email = EmailMessage(subject=subject, body=message, from_email='projekte@tortuga-webdesign.de',
                              to=recipient_list)
+        if '<a' in message or '</a>' in message:
+            logger.error('postforms:tortugawebdesignde:kontakt: email denied because of links')
+            return JsonResponse({'is_form_valid': False})
         email.send()
         logger.error('postforms:tortugawebdesignde:kontakt: email sent')
         return JsonResponse({'is_form_valid': True})
