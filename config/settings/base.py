@@ -167,7 +167,5 @@ EMAIL_PORT = 587
 
 # Cors Headers
 CORS_ORIGIN_WHITELIST = [
-    'https://kues-gutachter.webflow.io',
-    'https://www.kues-gutachter.de',
     'https://pz-mo.de'
 ]
