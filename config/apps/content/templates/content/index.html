@@ -1,0 +1,69 @@
+<!doctype html>
+
+{% load static %}
+
+<html lang="en">
+
+<head>
+	<title>Project ex4d4</title>
+	{% include 'partials/head.html' %}
+</head>
+
+<body>
+
+	<section>
+		<div class="d-flex align-items-center min-vh-100">
+			<div class="container">
+				<div class="row justify-content-center">
+					{% block column %}
+					<div class="col-12 col-md-6 col-lg-4 col-mx-auto my-5">
+						<div class="d-flex align-items-center">
+							{% block top %}
+							<h1 class="m-0">Hello {{ user.get_short_name }}</h1>
+							{% endblock top %}
+						</div>
+						<hr class="hr">
+
+						{% block main %}
+
+						<ul class="list-group">
+							<li class="list-group-item active">Tools</li>
+							<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{% url 'fpioli:btvtool' %}">
+								BTV Tool
+								{% if user.get_username not in permits.btv %}
+									 <span class="badge badge-primary badge-pill">Locked</span>
+								{% endif %}
+							</a>
+							<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{% url 'gelbeseiten:index' %}">
+								Gelbe Seiten Tool 2.0
+								{% if user.get_username not in permits.gelbeseiten %}
+									 <span class="badge badge-primary badge-pill">Locked</span>
+								{% endif %}
+							</a>
+						</ul>
+
+						{% endblock main %}
+
+						<hr>
+
+						{% block sub %}
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<a class="btn btn-secondary" href="{% url 'users:passwordchange' %}">Change Password</a>
+							<a class="btn btn-secondary" href="{% url 'users:signout' %}">Logout</a>
+						</div>
+						{% endblock sub %}
+
+					</div>
+					{% endblock column %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- JAVASCRIPT -->
+	<!-- ================================================== -->
+	{% include 'partials/scripts.html' %}
+
+</body>
+
+</html>

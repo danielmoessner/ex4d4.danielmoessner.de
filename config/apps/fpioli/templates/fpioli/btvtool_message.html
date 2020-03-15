@@ -1,0 +1,31 @@
+{% extends 'content/index.html' %}
+
+
+{% block column %}
+<div class="col-12 col-md-8 col-lg-6 col-mx-auto my-5">
+{% block top %}
+<div class="d-flex align-items-center">
+	<h1 class="m-0">BTV Tool</h1>
+	<div class="dropdown ml-auto">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Actions
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="{% url 'fpioli:btvtool_messages' %}">Back</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="{% url 'content:main' %}">Start</a>
+		</div>
+	</div>
+</div>
+{% endblock top %}
+<hr>
+{% block main %}
+<h2>{{ btvrun.name }}</h2>
+<p>{{ btvrun.message|safe }}</p>
+{% endblock main %}
+<hr>
+{% block sub %}
+<a class="btn btn-secondary" href="{% url 'fpioli:btvtool_messages' %}">Back</a>
+{% endblock sub %}
+</div>
+{% endblock column %}

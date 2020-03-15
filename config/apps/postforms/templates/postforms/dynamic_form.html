@@ -1,0 +1,11 @@
+<html>
+<head>
+    <title>{{ object.website }}</title>
+</head>
+<body>
+<form action="{% url 'postforms:custom_form' object.url %}" enctype="multipart/form-data" method="post">
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

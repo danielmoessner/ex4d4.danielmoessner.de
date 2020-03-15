@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body %}
+<a href="{% url 'gelbeseiten:data' %}">back</a>
+<hr>
+<h2>{{ company.name }}</h2>
+<p>E-Mail: {{ company.email }}</p>
+<p>Address: {{ company.address }}</p>
+<p>Zipcode: {{ company.zipcode }}</p>
+<p>City: {{ company.city }}</p>
+<p>Phone: {{ company.phone }}</p>
+<p>Website: {{ company.website }}</p>
+<p>Category: {{ company.category }}</p>
+<p>Location: {{ company.location }}</p>
+<hr>
+<a href="{% url 'gelbeseiten:data' %}">back</a>
+{% endblock body %}

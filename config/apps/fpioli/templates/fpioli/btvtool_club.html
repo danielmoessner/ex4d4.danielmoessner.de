@@ -1,0 +1,32 @@
+{% extends 'content/index.html' %}
+
+
+{% block top %}
+<h1 class="m-0">BTV Tool</h1>
+<div class="dropdown ml-auto">
+	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Actions
+	</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		<a class="dropdown-item" href="{% url 'fpioli:btvtool_clubs' %}">Back</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item" href="{% url 'content:main' %}">Start</a>
+	</div>
+</div>
+{% endblock top %}
+{% block main %}
+<h2>{{ club.name }}</h2>
+<p>Number: {{ club.number }}</p>
+<p>E-Mail: {{ club.email }}</p>
+<p>Address: {{ club.address }}</p>
+<p>Members: {{ club.members }}</p>
+<p>Adult members: {{ club.adult_members }}</p>
+<p>Youth members: {{ club.youth_members }}</p>
+<p>Outside courts: {{ club.outside_courts }}</p>
+<p>Indoor courts: {{ club.indoor_courts }}</p>
+<p>Competition courts: {{ club.competition_courts }}</p>
+<p>Url: {{ club.url }}</p>
+{% endblock main %}
+{% block sub %}
+<a class='btn btn-secondary' href="{% url 'fpioli:btvtool_clubs' %}">Back</a>
+{% endblock sub %}
