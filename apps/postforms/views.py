@@ -48,10 +48,13 @@ class CustomFormView(SingleObjectMixin, FormView):
         message = ''
         for key, value in form.cleaned_data.items():
             message += '{}: {}\n'.format(key, value)
+        for custom_filter in self.object.custom_filter.all():
+            if custom_filter.custom_filter in message:
+                return JsonResponse({'is_form_valid': False})
         recipient_list = [self.object.recipient1]
         if self.object.recipient2:
             recipient_list += [self.object.recipient2]
         email = EmailMessage(subject=subject, body=message, from_email='projekte@tortuga-webdesign.de',
                              to=recipient_list)
-        email.send()
+        # email.send()
         return JsonResponse({'is_form_valid': True})
