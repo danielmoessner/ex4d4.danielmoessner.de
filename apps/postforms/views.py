@@ -56,5 +56,5 @@ class CustomFormView(SingleObjectMixin, FormView):
             recipient_list += [self.object.recipient2]
         email = EmailMessage(subject=subject, body=message, from_email='projekte@tortuga-webdesign.de',
                              to=recipient_list)
-        # email.send()
+        email.send()
         return JsonResponse({'is_form_valid': True})
